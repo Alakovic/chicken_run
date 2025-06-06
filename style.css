@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+    background-image: url('assets/images/background/background.png') ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.game {
+    text-align: center;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 100%;
+    background-color: black;
+}
+
+h1 {
+    color: white;
+}
