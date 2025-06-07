@@ -1,43 +1,34 @@
 class World {
     character = new Character();
-    enemies = [
-    new Enemy(),
-    new Enemy(),
-    new Enemy()
-    ];
-
+    level = level_1;
     ctx;
+    keyboard;
     game_width;
     game_height;
-    clouds = [
-        new Cloud('assets/images/map/1.png'),
-        new Cloud('assets/images/map/2.png')
-    ];
+    clouds =level_1.clouds;
+    backgroundObjects =level_1.backgroundObjects;
+    camera_x = -100;
 
-    backgroundObjects = [ // (img, x,y,width,height)
-        new BackgroundObject('assets/images/map/background.png',0,0,1500,750),
-        new BackgroundObject('assets/images/map/image-05.png',300,200,380,400),
-        new BackgroundObject('assets/images/map/image-05.png',900,200,380,400),
-        new BackgroundObject('assets/images/map/image-03.png',200,110,300,500),
-        new BackgroundObject('assets/images/map/image-03.png',800,110,300,500),
-        new BackgroundObject('assets/images/map/image-04.png',500,280,200,350),
-        new BackgroundObject('assets/images/map/image-04.png',1100,280,200,350),
-        new BackgroundObject('assets/images/map/image-09.png',0,600,1600,100)
-    ]
-
-    constructor(canvas){
+    constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d')
         this.game_width = canvas.width;
         this.game_height = canvas.height;
+        this.keyboard = keyboard;
         this.draw()
+        this.setWorld();
     }
 
+    setWorld(){
+        this.character.world = this;
+    }
 
     draw(){
         this.ctx.clearRect(0,0,this.game_width,this.game_height)
-        this.addObjectsToMap(this.backgroundObjects)
-        this.addObjectsToMap(this.clouds)
+        this.ctx.translate(this.camera_x,0)
+        this.addObjectsToMap(this.level.backgroundObjects)
+        this.addObjectsToMap(this.level.clouds)
         this.addToMap(this.character);
+        this.ctx.translate(-this.camera_x,0)
 
         // draw() wird immer wieder aufgerufen 
         requestAnimationFrame(() => this.draw());
@@ -50,7 +41,25 @@ class World {
     }
 
     addToMap(mo) {
+        if(mo.otherDirection) { // reverse character 
+        this.flipImage(mo)
+        }
         this.ctx.drawImage(mo.img, mo.x,mo.y,mo.width,mo.height);
+        if(mo.otherDirection) {
+        this.flipImageBack(mo)
+        }
+    }
+
+    flipImage(mo) {
+        this.ctx.save();
+            this.ctx.translate(mo.width,0);
+            this.ctx.scale(-1,1);
+            mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+            this.ctx.restore();
     }
 
 }
