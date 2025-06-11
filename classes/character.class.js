@@ -94,6 +94,8 @@ class Character extends MovableObject {
             this.playAnimations(this.images_running)
             }else if(this.world.keyboard.DOWN && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT )){
             this.playAnimations(this.images_sliding)
+            }else if(this.world.keyboard.UP && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT )) { // no space walking !! 
+            this.playAnimations(this.images_jumping)
             }else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT ) {
             this.playAnimations(this.images_walking)   
             }else if(this.world.keyboard.UP){
@@ -106,6 +108,6 @@ class Character extends MovableObject {
     }
     
     jump(){
-      return  this.speedY = 20;
+      return  this.speedY = 15;
     }
 }
