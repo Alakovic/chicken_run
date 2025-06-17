@@ -4,10 +4,6 @@ body {
     display: flex;
     justify-content: center;  
     align-items: center;     
-    background-image: url('assets/images/background/background.png') ;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .game {
@@ -20,8 +16,4 @@ canvas {
     display: block;
     max-width: 100%;
     background-color: black;
-}
-
-h1 {
-    color: white;
 }

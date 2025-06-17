@@ -58,7 +58,7 @@ class Character extends MovableObject {
     world;
     speed = 10;
 
-    constructor(y){
+    constructor(){
         super();
         this.loadImage('assets/images/character/idle/Idle_000.png');
         this.loadImages(this.images_walking);
