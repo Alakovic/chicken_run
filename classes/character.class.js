@@ -56,7 +56,7 @@ class Character extends MovableObject {
 
     currentImage = 0;
     world;
-    speed = 10;
+    speed = 50; // 10
 
     constructor(){
         super();
