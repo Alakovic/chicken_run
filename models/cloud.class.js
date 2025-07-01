@@ -14,6 +14,11 @@ class Cloud extends MovableObject{
 
     constructor(){
         super().loadImage(this.cloudImages[this.randomIndex]);
-        
+        this.animate();
     }
+
+    animate(){
+        this.moveLeft();  
+    }
+
 }
