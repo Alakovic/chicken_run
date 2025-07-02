@@ -1,11 +1,12 @@
 class Platform extends MovableObject {
 
-    height = 100;
+    
 
-    constructor(imagePath,x, width){
+    constructor(imagePath,x, width,height){
         super().loadImage(imagePath)
         this.x = x;
-        this.y = 600 - this.height;
+        this.y = 500;
         this.width = width;
+        this.height = height;
     }
 }
