@@ -1,35 +1,16 @@
 class World {
     character = new Character();
-    enemies = [
-        new Ant(),
-        new Ant(),
-        new Ant()
-    ];
-    
-    clouds = [
-        new Cloud(),
-        new Cloud(),
-        new Cloud()
-    ]
-    
-    platforms= [ //imagePath, x,width
-        new Platform('assets/images/background/floor/image-09.png',0,1200),
-    ]
-
-    backgroundObjects = [ //imagePath,x,y,width,height
-        new BackgroundObject('assets/images/background/background_img/background.png',-5,0,1200,600),
-        new BackgroundObject('assets/images/background/background_img/background.png',1190,0,1200,600)
-    ]
-
-    decorations = staticDecorations;
+    level;
     ctx;    
     canvas;
     keyboard;
+    camera_x = 0;
 
-    constructor(canvas , keyboard) {
+    constructor(canvas , keyboard,level) {
         this.ctx =canvas.getContext('2d');
         this.canvas = canvas;
-        this.keyboard = keyboard
+        this.keyboard = keyboard;
+        this.level = level;
         this.draw();
         this.setWorld();
     }
@@ -41,12 +22,14 @@ class World {
 
     draw(){
         this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height)
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addObjectsToMap(this.decorations);
-        this.addObjectsToMap(this.platforms);
+        this.ctx.translate(this.camera_x,0);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.decorations);
+        this.addObjectsToMap(this.level.platforms);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
-        this.addObjectsToMap(this.clouds)
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.clouds)
+        this.ctx.translate(-this.camera_x,0);
     
         requestAnimationFrame(() => {this.draw()}); // draw() wird immer wieder aufgerufen
     }
