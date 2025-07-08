@@ -1,6 +1,6 @@
-class Platform extends MovableObject {
+class Box extends MovableObject {
 
-    constructor(imagePath,x, width,height,y=500){
+    constructor(imagePath,x,y,width,height){
         super().loadImage(imagePath)
         this.x = x;
         this.y = y;

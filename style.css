@@ -1,9 +1,18 @@
-body{
+
+body {
+    margin: 0;
+    overflow-x: hidden;
     display: flex;
-    flex-direction:  column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
+    flex-direction:  column;
+    background-color: black;
 }
 
-canvas{
+canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
     background-color: black;
 }

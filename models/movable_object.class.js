@@ -41,4 +41,20 @@ class MovableObject {
         
     }
 
+    moveLeftRight(minX, maxX) {
+        let direction = -1; // Initial direction left , so -1
+    setInterval(() => {
+        this.x += this.speed * direction;
+        if (this.x <= minX) {
+            direction = 1;            // Change direction to right 
+            this.otherDirection = true;  // look right
+        } else if (this.x >= maxX) {
+            direction = -1;           // Change direction to left 
+            this.otherDirection = false; //look left 
+        }
+    }, 1000 / 60);
+}
+
+
+
 }

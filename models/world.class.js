@@ -26,6 +26,8 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.decorations);
         this.addObjectsToMap(this.level.platforms);
+        this.addObjectsToMap(this.level.box);
+        this.addObjectsToMap(this.level.obstacle);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds)
@@ -35,19 +37,17 @@ class World {
     }
 
     addToMap(mo) {
-        if (mo.otherDirection) {
             this.ctx.save();
-            this.ctx.translate(mo.width,0);
-            this.ctx.scale(-1,1);
-            mo.x = mo.x * -1 ;
+        if (mo.otherDirection) {
+            this.ctx.translate(mo.x + mo.width, mo.y);
+            this.ctx.scale(-1, 1);
+            this.ctx.drawImage(mo.img, 0, 0, mo.width, mo.height);
+        } else {
+            this.ctx.translate(mo.x, mo.y);
+            this.ctx.drawImage(mo.img, 0, 0, mo.width, mo.height);
         }
-            this.ctx.drawImage(mo.img,mo.x,mo.y,mo.width,mo.height);
-        if (mo.otherDirection){
-            mo.x = mo.x * -1 ;
             this.ctx.restore();
-        }
     }
-
     addObjectsToMap(objects){
         objects.forEach(o => {
             this.addToMap(o)
