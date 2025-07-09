@@ -29,7 +29,6 @@ class MovableObject {
         this.currentImage++;
     }
 
-
     moveRight(){
 
     }

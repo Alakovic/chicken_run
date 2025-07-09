@@ -28,6 +28,7 @@ class World {
         this.addObjectsToMap(this.level.platforms);
         this.addObjectsToMap(this.level.box);
         this.addObjectsToMap(this.level.obstacle);
+        this.addObjectsToMap(this.level.diamond);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds)
