@@ -34,7 +34,14 @@ function generateDecorations(images, xStart, xEnd, y, width, height, spacing) {
 }
 
 const staticDecorations = [ //images, xStart, xEnd, y, width, height, spacing
-    ...generateDecorations(trees, 300, 2400, 255, 150, 250, 200),
+    ...generateDecorations(trees, 300, 2400, 120, 150, 400, 200),
     ...generateDecorations(mushrooms,300,2400,465,40,40,200),
-    ...generateDecorations(flowers,400,2400,465,40,40,200)
+    ...generateDecorations(flowers,400,2400,465,40,40,200),
+    ...generateDecorations(trees,5900,14260, 120, 150, 400, 200),
+    ...generateDecorations(mushrooms,2650,4200,315,40,40,100),
+    ...generateDecorations(flowers,2700,4200,315,40,40,100),
+    ...generateDecorations(mushrooms,4700,14300,465,40,40,200),
+    ...generateDecorations(flowers,4600,14300,465,40,40,200),
+    ...generateDecorations(flowers,14800,16000,315,40,40,200),
+    ...generateDecorations(mushrooms,14850,15900,315,40,40,200)
 ];

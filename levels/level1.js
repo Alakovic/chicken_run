@@ -85,6 +85,9 @@ const level1 = new Level(
     new Obstacle('assets/images/background/obstacles/rock1.png', 600,430,80,80,10),
     new Obstacle('assets/images/background/obstacles/rock2.png', 1200,430,80,80,10),
     new Obstacle('assets/images/background/obstacles/rock3.png', 1800,430,80,80,10),
+    new Obstacle('assets/images/background/obstacles/rock3.png', 3000,280,80,80,10),
+    new Obstacle('assets/images/background/obstacles/rock2.png', 3500,280,80,80,10),
+    new Obstacle('assets/images/background/obstacles/rock1.png', 4000,280,80,80,10),
     new Obstacle('assets/images/background/obstacles/spike.png', 6640,440,100,70,20),
     new Obstacle('assets/images/background/obstacles/spike.png', 7240,440,100,70,20),
     new Obstacle('assets/images/background/obstacles/spike.png', 7840,440,100,70,20)
@@ -92,6 +95,13 @@ const level1 = new Level(
 [ //x,y,level
     new Diamond(15760,260,1)
 ],
+[ //x,y
+    new Hearth(4200,150),
+    new Hearth(10300,250),
+    new Hearth(12000,250),
+    new Hearth(13900,250)
+],
+coins1,
 staticDecorations,
 16100
 );
