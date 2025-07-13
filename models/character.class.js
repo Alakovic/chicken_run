@@ -39,8 +39,7 @@ class Character extends MovableObject {
         'assets/images/character/idle/Idle_008.png',
         'assets/images/character/idle/Idle_009.png',
         'assets/images/character/idle/Idle_010.png',
-        'assets/images/character/idle/Idle_011.png',
-        'assets/images/character/idle/Idle_012.png'
+        'assets/images/character/idle/Idle_011.png'
     ];
 
     constructor(){
@@ -80,15 +79,16 @@ class Character extends MovableObject {
         }, 1000 / 60 );
 
         setInterval(() => {
-            if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimations(this.images_walking);
-            }
-
-            if(this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.playAnimations(this.images_jumping);
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
+                this.playAnimations(this.images_jumping);
             } 
+            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimations(this.images_walking);
+            } 
+            else {
+                this.playAnimations(this.images_idle);
+            }
         }, 50);
-    }
-
+    } 
 }
