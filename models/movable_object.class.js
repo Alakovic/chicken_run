@@ -8,6 +8,21 @@ class MovableObject {
     currentImage = 0 ;
     speed = 0.15;
     otherDirection = false;
+    speedY = 0;
+    acceleration = 1;
+    
+    applyGravity() {
+        setInterval(() => {
+            if(this.isAboveGround() || this.speedY > 0 ) {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+            }
+        }, 1000 / 25)
+    }
+
+    isAboveGround() {
+        return this.y < 310;
+    }
 
     loadImage(path){
         this.img = new Image();
@@ -30,30 +45,29 @@ class MovableObject {
     }
 
     moveRight(){
-
+        this.x += this.speed;
     }
 
     moveLeft(){
-        setInterval(() =>{
-            this.x -= this.speed ;
-        },1000 / 60);
-        
+        this.x -= this.speed; 
     }
 
     moveLeftRight(minX, maxX) {
-        let direction = -1; // Initial direction left , so -1
+                let direction = -1; // Initial direction left , so -1
     setInterval(() => {
-        this.x += this.speed * direction;
-        if (this.x <= minX) {
-            direction = 1;            // Change direction to right 
-            this.otherDirection = true;  // look right
-        } else if (this.x >= maxX) {
-            direction = -1;           // Change direction to left 
-            this.otherDirection = false; //look left 
-        }
-    }, 1000 / 60);
-}
+                this.x += this.speed * direction;
+            if (this.x <= minX) {
+                direction = 1;            // Change direction to right 
+                this.otherDirection = true;  // look right
+            } else if (this.x >= maxX) {
+                direction = -1;           // Change direction to left 
+                this.otherDirection = false; //look left 
+            }
+        }, 1000 / 60);
+    }
 
-
+    jump(){
+        return  this.speedY = 15;
+    }
 
 }
