@@ -9,7 +9,7 @@ class MovableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
-    acceleration = 1;
+    acceleration = 2.5;
     
     applyGravity() {
         setInterval(() => {
@@ -67,7 +67,7 @@ class MovableObject {
     }
 
     jump(){
-        return  this.speedY = 15;
+        return  this.speedY = 20;
     }
 
 }

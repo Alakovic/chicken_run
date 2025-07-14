@@ -62,14 +62,15 @@ class Character extends MovableObject {
             this.otherDirection = true ;
             this.moveLeft();
         }
+            if(this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
+            }
             const margin = 100; // Distance in pixels from the left edge of the screen where the character should be positioned
             const maxCameraX = -(this.world.level.end_level_x - this.world.canvas.width); // The furthest left the camera can scroll, so the right edge of the level aligns with the right edge of the screen
             let cameraX = -this.x + margin; // Calculate camera position so the character stays 100px from the left
-
             if (cameraX < maxCameraX) {  // Prevent camera from going beyond the right edge of the level
             cameraX = maxCameraX;
         }
-
             const rightEdge = this.world.level.end_level_x - this.width; // The maximum x-position where the character is fully visible on screen
             if (this.x > rightEdge) { // Lock the camera at the end so the character doesn’t go partially off-screen
             cameraX = -(this.world.level.end_level_x - this.world.canvas.width); 
@@ -79,16 +80,16 @@ class Character extends MovableObject {
         }, 1000 / 60 );
 
         setInterval(() => {
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
+
+            if(this.isAboveGround()) {
                 this.playAnimations(this.images_jumping);
-            } 
-            else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimations(this.images_walking);
             } 
             else {
                 this.playAnimations(this.images_idle);
-            }
+            }}
         }, 50);
     } 
 }
