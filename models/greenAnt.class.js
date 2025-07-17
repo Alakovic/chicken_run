@@ -18,6 +18,7 @@ class greenAnt extends Ant {
         this.animate(this.images_walking);
         this.x = x;
         this.speed = 2.4;
+        this.damage = 10;
         this.moveLeftRight(this.x-100, this.x+100);
     }
 }

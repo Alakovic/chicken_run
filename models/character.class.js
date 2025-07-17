@@ -5,6 +5,14 @@ class Character extends MovableObject {
     width = 150;
     speed = 10 ;
     world;
+    energy = 100;
+
+    offset = {
+        top: 50,
+        bottom: 20,
+        left: 30,
+        right: 30
+    }
 
     images_walking = [
         'assets/images/character/walk/Walk_000.png',
@@ -42,11 +50,32 @@ class Character extends MovableObject {
         'assets/images/character/idle/Idle_011.png'
     ];
 
+    images_die = [
+        'assets/images/character/die/Die_000.png',
+        'assets/images/character/die/Die_001.png',
+        'assets/images/character/die/Die_002.png',
+        'assets/images/character/die/Die_003.png',
+        'assets/images/character/die/Die_004.png',
+        'assets/images/character/die/Die_005.png',
+        'assets/images/character/die/Die_006.png',
+        'assets/images/character/die/Die_007.png',
+        'assets/images/character/die/Die_008.png',
+        'assets/images/character/die/Die_009.png',
+    ];
+
+    images_hurt = [
+        'assets/images/character/hurt/Hurt_000.png',
+        'assets/images/character/hurt/Hurt_001.png',
+        'assets/images/character/hurt/Hurt_002.png',
+    ];
+
     constructor(){
     super().loadImage('assets/images/character/idle/Idle_000.png') ;
     this.loadImages(this.images_walking);
     this.loadImages(this.images_jumping);
     this.loadImages(this.images_idle);
+    this.loadImages(this.images_die);
+    this.loadImages(this.images_hurt);
     this.applyGravity();
     this.animate();
     }
@@ -80,8 +109,12 @@ class Character extends MovableObject {
         }, 1000 / 60 );
 
         setInterval(() => {
-
-            if(this.isAboveGround()) {
+            if(this.isDead()) {
+                this.playAnimations(this.images_die)
+            }else if (this.isHurt())
+            {
+                this.playAnimations(this.images_hurt);
+            }else if(this.isAboveGround()) {
                 this.playAnimations(this.images_jumping);
             } else {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
