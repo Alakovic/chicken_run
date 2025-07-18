@@ -1,13 +1,5 @@
-class MovableObject {
-    x = 120;
-    y = 400;
-    height = 150;
-    width = 100;
-    img;
-    imageCache = {};
-    currentImage = 0 ;
+class MovableObject extends DrawableObject {
     speed = 0.15;
-    otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
     energy;
@@ -34,19 +26,6 @@ class MovableObject {
 
     isAboveGround() {
         return this.y < 310;
-    }
-
-    loadImage(path){
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
     playAnimations(images) {
@@ -87,51 +66,11 @@ class MovableObject {
         return  this.speedY = 20;
     }
 
-    isCollidable() {
-        return (
-            this instanceof Character || 
-            this instanceof Ant ||
-            this instanceof Snake ||
-            this instanceof Rabbit ||
-            this instanceof Obstacle ||
-            this instanceof Box ||
-            this instanceof Coin ||
-            this instanceof Hearth ||
-            this instanceof Diamond ||
-            this instanceof Centipede
-        );
-    }
-
-    flipImage(ctx) {
-        if (this.otherDirection) {
-            ctx.translate(this.x + this.width, this.y);
-            ctx.scale(-1, 1);
-        } else {
-            ctx.translate(this.x, this.y);
-        }
-        ctx.drawImage(this.img, 0, 0, this.width, this.height);
-    }
-
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x &&
             this.y + this.height - this.offset.bottom > mo.y &&
             this.x + this.offset.left < mo.x &&
             this.y  + this.offset.top < mo.y + mo.height
-    }
-
-    drawHitbox(ctx) {
-    if(this.isCollidable()) {
-    ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "red";
-    ctx.rect(
-        this.offset.left,
-        this.offset.top,
-        this.width - this.offset.left - this.offset.right,
-        this.height - this.offset.top - this.offset.bottom
-    );
-        ctx.stroke();
-        }
     }
 
     hit(damage) {
