@@ -8,30 +8,58 @@ class Centipede extends MovableObject {
     super();
     }
 
+    offset = {
+        top: 80,
+        bottom: 80,
+        left: 60,
+        right:60
+    }
+
     playAnimationsOnce(images, onFinish, interval) {
+        if (this.animationInterval) {
+            clearInterval(this.animationInterval);
+        }
+            this.animationInterval = setInterval(() => {
+        if (this.currentImage < images.length) {
+            this.playAnimations(images);
+            this.currentImage++;
+        } else {
+            const lastImage = images[images.length - 1];
+            this.img = this.imageCache[lastImage];
+            clearInterval(this.animationInterval);
+            this.animationInterval = null;
+            if (onFinish) onFinish();
+        }
+    }, interval);
+}
+
+    playAnimationLoop(images, interval) {
         if (this.animationInterval) {
             clearInterval(this.animationInterval);
         }
             this.currentImage = 0;
             this.animationInterval = setInterval(() => {
-        if (this.currentImage >= images.length) {
-            clearInterval(this.animationInterval);
-            this.animationInterval = null;
-            if (onFinish) onFinish();
-            return;
-        }
+            this.animationFrameSpeed(2);
             this.playAnimations(images);
+            this.currentImage = (this.currentImage + 1) % images.length;
         }, interval);
-    } 
+    }
 
     centipedeComeOutAndGoBack(imageOut, imageIdle, imageGoIn) {
-    this.playAnimationsOnce(imageOut, () => {
-        this.playAnimationsOnce(imageIdle, () => {
-            this.playAnimationsOnce(imageGoIn, () => {
-                this.centipedeComeOutAndGoBack(imageOut, imageIdle, imageGoIn); // loop
-            });
-        },1000 / 25); // Brzina idle animacije
-    }, 1000 / 25); // Brzina izlaska
+                    this.playAnimationsOnce(imageOut, () => {
+                    this.playAnimationLoop(imageIdle, 1000 / 25); 
+        setTimeout(() => {
+                if (this.animationInterval) {
+                    clearInterval(this.animationInterval);
+                    this.animationInterval = null;
+                    }
+                    this.playAnimationsOnce(imageGoIn, () => {
+                    this.centipedeComeOutAndGoBack(imageOut, imageIdle, imageGoIn);
+                }, 1000 / 10); 
+            },2000); 
+        }, 1000 / 10); 
+    }
+
 }
-}
+
 

@@ -110,17 +110,23 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if(this.isDead()) {
+                this.animationFrameSpeed(2)
                 this.playAnimations(this.images_die)
             }else if (this.isHurt())
             {
+                this.animationFrameSpeed(3)
                 this.playAnimations(this.images_hurt);
+                console.log("Frame:", this.currentImage);
             }else if(this.isAboveGround()) {
+                this.animationFrameSpeed(1)
                 this.playAnimations(this.images_jumping);
             } else {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.animationFrameSpeed(1)
                 this.playAnimations(this.images_walking);
             } 
             else {
+                this.animationFrameSpeed(1)
                 this.playAnimations(this.images_idle);
             }}
         }, 50);

@@ -7,8 +7,16 @@ class Rabbit extends MovableObject {
     super();
     }
 
+    offset = {
+        top: 80,
+        bottom: 60,
+        left: 50,
+        right: 70
+    }
+
     animate(images) {
         setInterval(() => {
+            this.animationFrameSpeed(1);
             this.playAnimations(images);
         }, 40);
     }

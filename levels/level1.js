@@ -9,9 +9,9 @@ const level1 = new Level(
     new whiteRabbit(12660),
     new whiteRabbit(12960),
     new whiteRabbit(13260),
-    new greenCentipede(14900, 280),
-    new greenCentipede(15100, 280),
-    new greenCentipede(15300, 280)
+    new blueCentipede(14900, 280),
+    new blueCentipede(15100, 280),
+    new blueCentipede(15300, 280)
 ],
 [
     new Cloud(),
@@ -88,9 +88,9 @@ const level1 = new Level(
     new Obstacle('assets/images/background/obstacles/rock3.png', 3000,280,80,80,10),
     new Obstacle('assets/images/background/obstacles/rock2.png', 3500,280,80,80,10),
     new Obstacle('assets/images/background/obstacles/rock1.png', 4000,280,80,80,10),
-    new Obstacle('assets/images/background/obstacles/spike.png', 6640,440,100,70,20),
-    new Obstacle('assets/images/background/obstacles/spike.png', 7240,440,100,70,20),
-    new Obstacle('assets/images/background/obstacles/spike.png', 7840,440,100,70,20)
+    new Spike('assets/images/background/obstacles/spike.png', 6640,440,100,70,20),
+    new Spike('assets/images/background/obstacles/spike.png', 7240,440,100,70,20),
+    new Spike('assets/images/background/obstacles/spike.png', 7840,440,100,70,20)
 ],
 [ //x,y,level
     new Diamond(15760,260,1)

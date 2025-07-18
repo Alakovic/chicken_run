@@ -13,6 +13,8 @@ class MovableObject {
     energy;
     damage;
     lastHit = 0
+    animationFrameCounter = 0; 
+    currentAnimationImages;
 
     offset = {
         top : 0,
@@ -48,10 +50,15 @@ class MovableObject {
     }
 
     playAnimations(images) {
+        if (this.currentAnimationImages !== images) {
+        this.currentAnimationImages = images;
+        this.currentImage = 0;
+        this.animationFrameCounter = 0;
+        }
+
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
-        this.currentImage++;
     }
 
     moveRight(){
@@ -143,7 +150,15 @@ class MovableObject {
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Difference in ms 
         timepassed = timepassed / 1000 ; // Difference in s 
-        return timepassed < 1;
+        return timepassed < 0.25;
+    }
+
+    animationFrameSpeed(speed){
+        this.animationFrameCounter++;
+        if(this.animationFrameCounter >= speed) {
+            this.animationFrameCounter = 0;
+            this.currentImage++;
+        }
     }
 
 }

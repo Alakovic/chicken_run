@@ -18,10 +18,17 @@ class Hearth extends MovableObject {
         this.width = 60;
         this.height = 60;
     }
-
+    
+    offset = {
+        top: 60,
+        bottom: 60,
+        left: 60,
+        right: 60
+    }
 
     animate() {
         setInterval(() => {
+            this.animationFrameSpeed(1)
             this.playAnimations(this.images_hearth);
         }, 200 ); 
     }

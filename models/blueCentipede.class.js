@@ -1,4 +1,4 @@
-class greenCentipede extends Centipede {
+class blueCentipede extends Centipede {
     images_comingOut = [
         'assets/images/enemies/centipeds/green/come_out/__blue_centipede_come_out_000.png',
         'assets/images/enemies/centipeds/green/come_out/__blue_centipede_come_out_001.png',

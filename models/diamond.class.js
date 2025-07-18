@@ -25,6 +25,13 @@ class Diamond extends MovableObject {
         this.animate();
     }
 
+    offset = {
+        top:100,
+        bottom: 100,
+        left: 100,
+        right:100
+    }
+
     setDiamondByLevel(level) {
     if (level === 1) {
             this.images = this.blue_diamond;
@@ -39,6 +46,7 @@ class Diamond extends MovableObject {
 
     animate() {
         setInterval(() => {
+            this.animationFrameSpeed(1)
             this.playAnimations(this.images);
         }, 200 ); 
     }

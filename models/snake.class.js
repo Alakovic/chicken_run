@@ -7,8 +7,16 @@ class Snake extends MovableObject {
     super();
     }
 
+    offset = {
+        top: 80,
+        bottom: 60,
+        left: 75,
+        right: 75
+    }
+
     animate(images) {
         setInterval(() => {
+            this.animationFrameSpeed(1);
             this.playAnimations(images);
         }, 100);
     }
