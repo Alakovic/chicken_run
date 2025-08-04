@@ -72,5 +72,6 @@ class blueCentipede extends Centipede {
         this.centipedeComeOutAndGoBack(this.images_comingOut,this.images_idle,this.images_goIn);
         this.x = x;
         this.y = y;
+        this.damage = 15; 
     }
 }

@@ -8,7 +8,7 @@ class World {
     statusBar = new StatusBar();
 
     constructor(canvas , keyboard,level) {
-        this.ctx =canvas.getContext('2d');
+        this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = level;
@@ -27,9 +27,15 @@ class World {
             this.level.enemies.forEach((enemy) => {
                 if( this.character.isColliding(enemy)) {
                     this.character.hit(enemy.damage);
-                    this.statusBar.setPercentage(this.character.energy)
+                    this.statusBar.setPercentage(this.character.energy);
                 }
             });
+            this.level.obstacle.forEach((o) => {
+                if(this.character.isColliding(o)) {
+                    this.character.hit(o.damage);
+                    this.statusBar.setPercentage(this.character.energy);
+                }
+            })
         }, 200)
     }
 

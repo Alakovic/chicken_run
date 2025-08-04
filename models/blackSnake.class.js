@@ -15,6 +15,7 @@ class blackSnake extends Snake {
         this.animate(this.images_walking);
         this.x = x;
         this.speed = 1.5;
+        this.damage = 10;
         this.moveLeftRight(this.x-50, this.x+50);
     }
 }

@@ -19,6 +19,7 @@ class whiteRabbit extends Rabbit {
         this.animate(this.images_walking);
         this.x = x;
         this.speed = 0.8;
+        this.damage = 10;
         this.moveLeftRight(this.x-200, this.x+200);
     }
 }
