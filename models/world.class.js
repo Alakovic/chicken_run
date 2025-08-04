@@ -6,15 +6,25 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    coinBar = new CoinBar();
+    totalCoins; 
 
     constructor(canvas , keyboard,level) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.level = level;
+        this.startLevel(level);
         this.draw();
         this.setWorld();
         this.checkCollisions();
+    }
+
+    startLevel(level) {
+        this.level = level;
+        this.character.coinCount = 0;
+        this.totalCoins = this.level.coin.length;
+        
+        // <----- Place for other things that need to be reset ----
     }
 
     setWorld(){
@@ -35,8 +45,26 @@ class World {
                     this.character.hit(o.damage);
                     this.statusBar.setPercentage(this.character.energy);
                 }
-            })
+            });
+
+            this.checkCoinCollection();
+
         }, 200)
+    }
+
+    checkCoinCollection() {
+        this.level.coin.forEach((coin, index) => {
+            if(this.character.isColliding(coin)) {
+                this.character.coinCount += coin.value;
+                
+                let percentage = Math.min((this.character.coinCount / this.totalCoins) * 100 , 100);
+                this.coinBar.setPercentage(percentage);
+                console.log("Sakupljeno : " , this.character.coinCount + "Postotak:", percentage );
+                
+
+                this.level.coin.splice(index,1) ; // Remove collected coin
+            }
+        });
     }
 
     draw(){
@@ -56,6 +84,7 @@ class World {
         this.ctx.translate(-this.camera_x,0);
         //----Space for fixed objects --- 
         this.addToMap(this.statusBar);
+        this.addToMap(this.coinBar);
         this.ctx.translate(this.camera_x,0);
         this.ctx.translate(-this.camera_x,0);
     
