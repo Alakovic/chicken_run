@@ -28,9 +28,9 @@ class CoinBar extends DrawableObject {
     constructor(){
         super();
         this.loadImages(this.images_bar)
-        this.x = 430;
-        this.y = 10;
-        this.width = 300;
+        this.x = 30;
+        this.y = 60;
+        this.width = 240;
         this.height = 60;
         this.setPercentage(0);
     }
@@ -49,4 +49,4 @@ class CoinBar extends DrawableObject {
         if (index < 0) index = 0;
         return index;
     }
-}
+} 

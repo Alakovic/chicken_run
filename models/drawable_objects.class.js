@@ -8,6 +8,12 @@ class DrawableObject {
     width = 100;
     otherDirection = false;
 
+    draw(ctx) {
+        if (this.img) {
+            ctx.drawImage(this.img, 0, 0, this.width, this.height);
+        }
+    }
+
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -28,7 +34,6 @@ class DrawableObject {
         } else {
             ctx.translate(this.x, this.y);
         }
-        ctx.drawImage(this.img, 0, 0, this.width, this.height);
     }
 
     drawHitbox(ctx) {

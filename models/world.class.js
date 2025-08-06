@@ -7,6 +7,7 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     coinBar = new CoinBar();
+    timeBar = new TimeBar();
     totalCoins; 
 
     constructor(canvas , keyboard,level) {
@@ -23,6 +24,8 @@ class World {
         this.level = level;
         this.character.coinCount = 0;
         this.totalCoins = this.level.coin.length;
+        this.timeBar.seconds = 0;
+        this.startTimer();
         
         // <----- Place for other things that need to be reset ----
     }
@@ -56,15 +59,18 @@ class World {
         this.level.coin.forEach((coin, index) => {
             if(this.character.isColliding(coin)) {
                 this.character.coinCount += coin.value;
-                
                 let percentage = Math.min((this.character.coinCount / this.totalCoins) * 100 , 100);
-                this.coinBar.setPercentage(percentage);
-                console.log("Sakupljeno : " , this.character.coinCount + "Postotak:", percentage );
-                
-
+                this.coinBar.setPercentage(percentage)
                 this.level.coin.splice(index,1) ; // Remove collected coin
             }
         });
+    }
+
+    startTimer(){
+        if (this.timeInterval) clearInterval(this.timeInterval);
+        this.timeInterval = setInterval(() => {
+        this.timeBar.second++;
+    }, 1000);
     }
 
     draw(){
@@ -85,6 +91,7 @@ class World {
         //----Space for fixed objects --- 
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
+        this.addToMap(this.timeBar)
         this.ctx.translate(this.camera_x,0);
         this.ctx.translate(-this.camera_x,0);
     
@@ -93,8 +100,12 @@ class World {
 
     addToMap(mo) {
         this.ctx.save();
-        mo.flipImage(this.ctx);       
-        mo.drawHitbox(this.ctx);
+        if (mo instanceof MovableObject) {
+            mo.flipImage(this.ctx);
+        } else {
+            this.ctx.translate(mo.x, mo.y); 
+        }
+        mo.draw(this.ctx);         
         this.ctx.restore();
     }
 
